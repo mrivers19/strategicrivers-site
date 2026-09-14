@@ -334,20 +334,32 @@ export default function App() {
       width: '100%',
       borderCollapse: 'collapse',
       textAlign: 'left',
-      fontSize: '13px'
+      fontSize: '12px'
     },
     th: {
       backgroundColor: '#0f172a',
       color: '#94a3b8',
-      padding: '12px',
+      padding: '10px 12px',
       borderBottom: '1px solid #334155',
-      fontWeight: '600'
+      fontWeight: '600',
+      whiteSpace: 'nowrap'
     },
     td: {
-      padding: '12px',
+      padding: '10px 12px',
       borderBottom: '1px solid #334155',
       color: '#cbd5e1'
     },
+    pill: (val) => ({
+      backgroundColor: val > 0 ? '#134e4a' : 'transparent',
+      color: val > 0 ? '#2dd4bf' : '#64748b',
+      border: val > 0 ? '1px solid #0d9488' : 'none',
+      padding: '2px 8px',
+      borderRadius: '4px',
+      fontFamily: 'monospace',
+      fontWeight: 'bold',
+      fontSize: '12px',
+      display: 'inline-block'
+    }),
     input: {
       width: '100%',
       backgroundColor: '#0f172a',
@@ -457,32 +469,57 @@ export default function App() {
             </div>
           </section>
 
+          {/* Restored Full Matrix Table on Overview Tab */}
           <section style={styles.tableCard}>
-            <h3 style={{ ...styles.cardTitle, marginBottom: '16px' }}>
-              Live Digital Pathology FDA Clearances Summary (2017–2026)
-            </h3>
-            <table style={styles.table}>
-              <thead>
-                <tr>
-                  <th style={styles.th}>Code</th>
-                  <th style={styles.th}>Category Title</th>
-                  <th style={styles.th}>CFR Regulation</th>
-                  <th style={{ ...styles.th, textAlign: 'right' }}>Total Clearances</th>
-                </tr>
-              </thead>
-              <tbody>
-                {analyticsMatrix.codes.map(code => (
-                  <tr key={code}>
-                    <td style={{ ...styles.td, fontFamily: 'monospace', fontWeight: 'bold', color: '#2dd4bf' }}>{code}</td>
-                    <td style={{ ...styles.td, color: '#ffffff', fontWeight: '500' }}>{CODE_TAXONOMY[code]?.title}</td>
-                    <td style={styles.td}>{CODE_TAXONOMY[code]?.reg}</td>
-                    <td style={{ ...styles.td, textAlign: 'right', fontWeight: 'bold', color: '#2dd4bf' }}>
-                      {analyticsMatrix.matrix[code]["Total"]}
-                    </td>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '12px' }}>
+              <div>
+                <h3 style={{ ...styles.cardTitle, margin: 0 }}>
+                  Digital Pathology Regulatory Matrix (2017–2026)
+                </h3>
+                <p style={{ ...styles.cardText, fontSize: '12px', marginTop: '4px' }}>
+                  FDA clearance volumes across core product codes (PSY, QKQ, SIX, QYV, QPN, SFH, SHW)
+                </p>
+              </div>
+              <button onClick={() => setActiveTab('radar')} style={styles.primaryBtn}>
+                Explore Full Database ({records.length} Clearances) →
+              </button>
+            </div>
+
+            <div style={{ overflowX: 'auto' }}>
+              <table style={styles.table}>
+                <thead>
+                  <tr>
+                    <th style={styles.th}>Code</th>
+                    <th style={styles.th}>Category Title & Scope</th>
+                    {analyticsMatrix.years.map(y => (
+                      <th key={y} style={{ ...styles.th, textAlign: 'center' }}>{y}</th>
+                    ))}
+                    <th style={{ ...styles.th, textAlign: 'right', color: '#2dd4bf' }}>Total</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {analyticsMatrix.codes.map(code => (
+                    <tr key={code}>
+                      <td style={{ ...styles.td, fontFamily: 'monospace', fontWeight: 'bold', color: '#2dd4bf' }}>{code}</td>
+                      <td style={{ ...styles.td, color: '#ffffff', fontWeight: '500' }}>
+                        {CODE_TAXONOMY[code]?.title}
+                        <span style={{ color: '#64748b', fontSize: '11px', marginLeft: '6px' }}>({CODE_TAXONOMY[code]?.reg})</span>
+                      </td>
+                      {analyticsMatrix.years.map(y => (
+                        <td key={y} style={{ ...styles.td, textAlign: 'center' }}>
+                          <span style={styles.pill(analyticsMatrix.matrix[code][y])}>
+                            {analyticsMatrix.matrix[code][y]}
+                          </span>
+                        </td>
+                      ))}
+                      <td style={{ ...styles.td, textAlign: 'right', fontFamily: 'monospace', fontWeight: 'bold', color: '#2dd4bf', fontSize: '13px' }}>
+                        {analyticsMatrix.matrix[code]["Total"]}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </section>
         </main>
       )}
