@@ -172,7 +172,7 @@ export default function App() {
   const styles = {
     wrapper: {
       minHeight: '100vh',
-      backgroundColor: '#090d16',
+      backgroundColor: '#070b12',
       color: '#f8fafc',
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
       display: 'flex',
@@ -237,9 +237,10 @@ export default function App() {
       flexDirection: 'column',
       gap: '32px'
     },
-    // Lightened, Differentiated Hero Card
+    // Lightened, High-Contrast Hero Card
     heroCard: {
-      backgroundColor: '#243044',
+      backgroundColor: '#283548',
+      backgroundImage: 'linear-gradient(135deg, #283548 0%, #1e293b 100%)',
       borderRadius: '16px',
       border: '1px solid #475569',
       padding: '44px',
@@ -265,16 +266,19 @@ export default function App() {
     },
     heroDesc: {
       fontSize: '16px',
-      color: '#cbd5e1',
+      color: '#e2e8f0',
       lineHeight: '1.6',
       margin: 0
     },
+    // Headshot container shifted down ~1cm for vertical balance
     headshotContainer: {
       flex: '0 0 160px',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      gap: '12px'
+      justifyContent: 'center',
+      gap: '12px',
+      marginTop: '24px'
     },
     headshotPlaceholder: {
       width: '150px',
@@ -290,10 +294,10 @@ export default function App() {
       fontWeight: '600',
       overflow: 'hidden',
       textAlign: 'center',
-      boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.3)'
+      boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.4)'
     },
     headshotLabel: {
-      fontSize: '13px',
+      fontSize: '14px',
       fontWeight: '700',
       color: '#ffffff',
       textAlign: 'center',
@@ -303,7 +307,7 @@ export default function App() {
       fontSize: '11px',
       color: '#2dd4bf',
       textAlign: 'center',
-      margin: 0,
+      margin: '2px 0 0 0',
       fontFamily: 'monospace'
     },
     btnGroup: {
@@ -336,29 +340,30 @@ export default function App() {
       display: 'inline-block',
       border: '1px solid #475569'
     },
+    // Increased size and updated copy wording
     trustSignalRow: {
       display: 'flex',
       alignItems: 'center',
-      gap: '8px',
-      marginTop: '8px',
-      fontSize: '12px',
-      color: '#94a3b8'
+      gap: '10px',
+      marginTop: '12px',
+      fontSize: '14px',
+      color: '#cbd5e1',
+      fontWeight: '500'
     },
-    // Lightened, Differentiated Strategy Cards
     grid3: {
       display: 'grid',
       gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
       gap: '20px'
     },
     card: {
-      backgroundColor: '#1e293b',
-      border: '1px solid #334155',
+      backgroundColor: '#243044',
+      border: '1px solid #3d4d65',
       borderRadius: '12px',
       padding: '28px',
       display: 'flex',
       flexDirection: 'column',
       gap: '12px',
-      boxShadow: '0 10px 15px -3px rgba(0,0,0,0.2)'
+      boxShadow: '0 10px 15px -3px rgba(0,0,0,0.25)'
     },
     cardTitle: {
       fontSize: '18px',
@@ -372,20 +377,19 @@ export default function App() {
       lineHeight: '1.6',
       margin: 0
     },
-    // Distinct Industry Insights Section Divider
     sectionDivider: {
-      marginTop: '20px',
-      paddingTop: '28px',
+      marginTop: '24px',
+      paddingTop: '32px',
       borderTop: '1px solid #1e293b'
     },
     sectionLabel: {
-      fontSize: '12px',
+      fontSize: '13px',
       fontFamily: 'monospace',
       fontWeight: '700',
       color: '#2dd4bf',
       textTransform: 'uppercase',
       letterSpacing: '0.12em',
-      marginBottom: '12px',
+      marginBottom: '16px',
       display: 'flex',
       alignItems: 'center',
       gap: '8px'
@@ -489,7 +493,7 @@ export default function App() {
       {/* OVERVIEW TAB */}
       {activeTab === 'overview' && (
         <main style={styles.container}>
-          {/* Lightened, High-Contrast Top Hero Section */}
+          {/* Lightened, Differentiated Hero Section */}
           <section style={styles.heroCard}>
             <div style={styles.heroContent}>
               <h2 style={styles.heroTitle}>
@@ -514,15 +518,14 @@ export default function App() {
               </div>
 
               <div style={styles.trustSignalRow}>
-                <span style={{ color: '#2dd4bf', fontWeight: 'bold' }}>•</span>
-                <span>Active Board Member & Governance Advisor to four innovative digital pathology startups.</span>
+                <span style={{ color: '#2dd4bf', fontSize: '18px', fontWeight: 'bold' }}>•</span>
+                <span>Active Board Member & Strategic Advisor to four innovative digital pathology startups.</span>
               </div>
             </div>
 
-            {/* Headshot Anchor */}
+            {/* Shifted Headshot Anchor */}
             <div style={styles.headshotContainer}>
               <div style={styles.headshotPlaceholder}>
-                {/* Replace src attribute once image file is placed in public folder */}
                 <img 
                   src="/headshot.jpg" 
                   alt="Michael Rivers" 
@@ -540,7 +543,7 @@ export default function App() {
             </div>
           </section>
 
-          {/* Differentiated Strategic Pillar Cards */}
+          {/* Lightened Strategic Pillar Cards */}
           <section style={styles.grid3}>
             <div style={styles.card}>
               <h3 style={styles.cardTitle}>Commercial Strategy & Market Entry</h3>
@@ -562,7 +565,7 @@ export default function App() {
             </div>
           </section>
 
-          {/* Industry Insights Section (Darker Slate Feed) */}
+          {/* Industry Insights Section (Darker Deep Blue Surface) */}
           <div style={styles.sectionDivider}>
             <div style={styles.sectionLabel}>
               <span>📊</span> Industry Insights
