@@ -378,23 +378,25 @@ export default function App() {
       lineHeight: '1.6',
       margin: 0
     },
-    sectionDivider: {
-      marginTop: '24px',
-      paddingTop: '32px',
-      borderTop: '2px solid #1e293b'
-    },
-    sectionLabel: {
-      fontSize: '13px',
-      fontFamily: 'monospace',
-      fontWeight: '700',
-      color: '#2dd4bf',
-      textTransform: 'uppercase',
-      letterSpacing: '0.12em',
-      marginBottom: '16px',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '8px'
-    },
+// Inside the styles object in src/App.jsx:
+
+sectionDivider: {
+  marginTop: '36px',
+  paddingTop: '36px',
+  borderTop: '2px solid #2dd4bf', // High-visibility teal divider line
+  boxShadow: '0 -4px 12px rgba(45, 212, 191, 0.15)' // Subtle glow underneath
+},
+
+sectionLabel: {
+  fontSize: '20px', // Prominent section heading
+  fontFamily: 'monospace',
+  fontWeight: '800',
+  color: '#2dd4bf',
+  textTransform: 'uppercase',
+  letterSpacing: '0.1em',
+  marginBottom: '20px',
+  display: 'block'
+},
     tableCard: {
       backgroundColor: '#0b1329',
       border: '1px solid #1e293b',
@@ -566,11 +568,16 @@ export default function App() {
             </div>
           </section>
 
-          {/* Industry Insights Section (Deep Navy Surface) */}
-          <div style={styles.sectionDivider}>
-            <div style={styles.sectionLabel}>
-              <span>📊</span> Industry Insights
-            </div>
+       {/* Industry Insights Section */}
+<div style={styles.sectionDivider}>
+  <div style={styles.sectionLabel}>
+    Industry Insights
+  </div>
+
+  <section style={styles.tableCard}>
+    {/* Table content remains unchanged */}
+  </section>
+</div>
 
             <section style={styles.tableCard}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '12px' }}>
