@@ -237,14 +237,14 @@ export default function App() {
       flexDirection: 'column',
       gap: '32px'
     },
-    // Lightened, High-Contrast Hero Card
+    // High-Contrast Lightened Hero Card
     heroCard: {
-      backgroundColor: '#283548',
-      backgroundImage: 'linear-gradient(135deg, #283548 0%, #1e293b 100%)',
+      backgroundColor: '#334155',
+      backgroundImage: 'linear-gradient(135deg, #334155 0%, #243044 100%)',
       borderRadius: '16px',
-      border: '1px solid #475569',
+      border: '1px solid #64748b',
       padding: '44px',
-      boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.4)',
+      boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.5)',
       display: 'flex',
       gap: '40px',
       alignItems: 'center',
@@ -266,20 +266,19 @@ export default function App() {
     },
     heroDesc: {
       fontSize: '16px',
-      color: '#e2e8f0',
+      color: '#f1f5f9',
       lineHeight: '1.6',
       margin: 0
     },
-    // Headshot container shifted down ~1cm for vertical balance
     headshotContainer: {
       flex: '0 0 160px',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      gap: '12px',
-      marginTop: '24px'
+      gap: '12px'
     },
+    // Photo Frame with Image Positioning Fix
     headshotPlaceholder: {
       width: '150px',
       height: '150px',
@@ -289,12 +288,14 @@ export default function App() {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      color: '#94a3b8',
-      fontSize: '13px',
-      fontWeight: '600',
       overflow: 'hidden',
-      textAlign: 'center',
-      boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.4)'
+      boxShadow: '0 10px 20px rgba(0, 0, 0, 0.5)'
+    },
+    headshotImage: {
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover',
+      objectPosition: 'center 20%' // Centering offset to move face down into frame
     },
     headshotLabel: {
       fontSize: '14px',
@@ -330,24 +331,23 @@ export default function App() {
       display: 'inline-block'
     },
     secondaryBtn: {
-      backgroundColor: '#334155',
-      color: '#f8fafc',
+      backgroundColor: '#475569',
+      color: '#ffffff',
       padding: '12px 24px',
       borderRadius: '8px',
       fontWeight: '600',
       fontSize: '14px',
       textDecoration: 'none',
       display: 'inline-block',
-      border: '1px solid #475569'
+      border: '1px solid #64748b'
     },
-    // Increased size and updated copy wording
     trustSignalRow: {
       display: 'flex',
       alignItems: 'center',
       gap: '10px',
       marginTop: '12px',
       fontSize: '14px',
-      color: '#cbd5e1',
+      color: '#f1f5f9',
       fontWeight: '500'
     },
     grid3: {
@@ -355,15 +355,16 @@ export default function App() {
       gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
       gap: '20px'
     },
+    // High-Contrast Lightened Strategy Cards
     card: {
-      backgroundColor: '#243044',
-      border: '1px solid #3d4d65',
+      backgroundColor: '#293548',
+      border: '1px solid #475569',
       borderRadius: '12px',
       padding: '28px',
       display: 'flex',
       flexDirection: 'column',
       gap: '12px',
-      boxShadow: '0 10px 15px -3px rgba(0,0,0,0.25)'
+      boxShadow: '0 10px 15px -3px rgba(0,0,0,0.3)'
     },
     cardTitle: {
       fontSize: '18px',
@@ -373,14 +374,14 @@ export default function App() {
     },
     cardText: {
       fontSize: '14px',
-      color: '#cbd5e1',
+      color: '#e2e8f0',
       lineHeight: '1.6',
       margin: 0
     },
     sectionDivider: {
       marginTop: '24px',
       paddingTop: '32px',
-      borderTop: '1px solid #1e293b'
+      borderTop: '2px solid #1e293b'
     },
     sectionLabel: {
       fontSize: '13px',
@@ -493,7 +494,7 @@ export default function App() {
       {/* OVERVIEW TAB */}
       {activeTab === 'overview' && (
         <main style={styles.container}>
-          {/* Lightened, Differentiated Hero Section */}
+          {/* Lightened, High-Contrast Top Hero Section */}
           <section style={styles.heroCard}>
             <div style={styles.heroContent}>
               <h2 style={styles.heroTitle}>
@@ -523,13 +524,13 @@ export default function App() {
               </div>
             </div>
 
-            {/* Shifted Headshot Anchor */}
+            {/* Positioned Headshot Anchor */}
             <div style={styles.headshotContainer}>
               <div style={styles.headshotPlaceholder}>
                 <img 
                   src="/headshot.jpg" 
                   alt="Michael Rivers" 
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                  style={styles.headshotImage}
                   onError={(e) => {
                     e.target.style.display = 'none';
                     e.target.parentNode.innerText = 'Michael Rivers';
@@ -565,7 +566,7 @@ export default function App() {
             </div>
           </section>
 
-          {/* Industry Insights Section (Darker Deep Blue Surface) */}
+          {/* Industry Insights Section (Deep Navy Surface) */}
           <div style={styles.sectionDivider}>
             <div style={styles.sectionLabel}>
               <span>📊</span> Industry Insights
