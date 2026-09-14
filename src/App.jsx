@@ -253,18 +253,25 @@ export default function App() {
       flex: '1 1 600px',
       display: 'flex',
       flexDirection: 'column',
-      gap: '20px'
+      gap: '16px'
     },
     heroTitle: {
-      fontSize: '38px',
+      fontSize: '40px',
       fontWeight: '800',
       color: '#ffffff',
-      lineHeight: '1.2',
+      lineHeight: '1.15',
       margin: 0,
       letterSpacing: '-0.02em'
     },
+    heroSubtitle: {
+      fontSize: '22px',
+      fontWeight: '700',
+      color: '#2dd4bf',
+      lineHeight: '1.3',
+      margin: 0
+    },
     heroDesc: {
-      fontSize: '16px',
+      fontSize: '15px',
       color: '#f1f5f9',
       lineHeight: '1.6',
       margin: 0
@@ -314,7 +321,7 @@ export default function App() {
       gap: '12px',
       alignItems: 'center',
       flexWrap: 'wrap',
-      marginTop: '8px'
+      marginTop: '4px'
     },
     primaryBtn: {
       backgroundColor: '#0d9488',
@@ -342,7 +349,7 @@ export default function App() {
     trustSignalContainer: {
       display: 'flex',
       flexDirection: 'column',
-      gap: '8px',
+      gap: '10px',
       marginTop: '8px'
     },
     trustSignalRow: {
@@ -359,26 +366,21 @@ export default function App() {
       gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
       gap: '20px'
     },
-    card: {
+    cardCentered: {
       backgroundColor: '#293548',
       border: '1px solid #475569',
       borderRadius: '12px',
-      padding: '28px',
+      padding: '24px',
       display: 'flex',
-      flexDirection: 'column',
-      gap: '12px',
+      alignItems: 'center',
+      justifyContent: 'center',
+      textAlign: 'center',
       boxShadow: '0 10px 15px -3px rgba(0,0,0,0.3)'
     },
-    cardTitle: {
-      fontSize: '18px',
+    cardCenteredTitle: {
+      fontSize: '17px',
       fontWeight: '700',
       color: '#ffffff',
-      margin: 0
-    },
-    cardText: {
-      fontSize: '14px',
-      color: '#e2e8f0',
-      lineHeight: '1.6',
       margin: 0
     },
     sectionDivider: {
@@ -496,12 +498,15 @@ export default function App() {
       {/* OVERVIEW TAB */}
       {activeTab === 'overview' && (
         <main style={styles.container}>
-          {/* Lightened, High-Contrast Top Hero Section */}
+          {/* Main Hero Block */}
           <section style={styles.heroCard}>
             <div style={styles.heroContent}>
               <h2 style={styles.heroTitle}>
-                Strategy, Commercialization and Success in Digital Pathology
+                Rivers Strategic Advisors <span style={{ color: '#2dd4bf' }}>LLC</span>
               </h2>
+              <h3 style={styles.heroSubtitle}>
+                Strategy, Commercialization and Success in Digital Pathology
+              </h3>
               <p style={styles.heroDesc}>
                 Rivers Strategic Advisors is guiding early-stage innovators, corporate boards, and diagnostic leaders through market entry, regulatory label strategies (IVD/IUO/RUO), and the evolving commercial economics of digital diagnostics.
               </p>
@@ -511,7 +516,7 @@ export default function App() {
                   Contact Me
                 </a>
                 <a 
-                  href="https://www.linkedin.com/in/michael-rivers-ca/" 
+                  href="https://www.linkedin.com/in/michael-rivers-digitalpathology" 
                   target="_blank" 
                   rel="noreferrer" 
                   style={styles.secondaryBtn}
@@ -523,16 +528,20 @@ export default function App() {
               <div style={styles.trustSignalContainer}>
                 <div style={styles.trustSignalRow}>
                   <span style={{ color: '#2dd4bf', fontSize: '18px', fontWeight: 'bold' }}>•</span>
-                  <span>Active Board Member & Strategic Advisor to four innovative digital pathology startups.</span>
+                  <span>Former VP, Roche Diagnostics with 20+ years of experience in Diagnostics and Digital Pathology</span>
                 </div>
                 <div style={styles.trustSignalRow}>
                   <span style={{ color: '#2dd4bf', fontSize: '18px', fontWeight: 'bold' }}>•</span>
-                  <span>Board member of the Digital Pathology Association (DPA), President of the Digital Pathology Association Foundation and Co-Chair of the DPA Reimbursement Task Force</span>
+                  <span>Active Board Member & Strategic Advisor to four innovative digital pathology startups</span>
+                </div>
+                <div style={styles.trustSignalRow}>
+                  <span style={{ color: '#2dd4bf', fontSize: '18px', fontWeight: 'bold' }}>•</span>
+                  <span>Board member of the Digital Pathology Association (DPA), President of the DPA Foundation and Co-Chair of the DPA Reimbursement Task Force</span>
                 </div>
               </div>
             </div>
 
-            {/* Positioned Headshot Anchor */}
+            {/* Executive Headshot */}
             <div style={styles.headshotContainer}>
               <div style={styles.headshotPlaceholder}>
                 <img 
@@ -552,41 +561,32 @@ export default function App() {
             </div>
           </section>
 
-          {/* Lightened Strategic Pillar Cards */}
+          {/* Centered Expertise Pillar Buttons */}
           <section style={styles.grid3}>
-            <div style={styles.card}>
-              <h3 style={styles.cardTitle}>Commercial Strategy & Market Entry</h3>
-              <p style={styles.cardText}>
-                Structuring go-to-market execution, global distribution strategy, and regulatory label positioning (IVD vs. RUO) to maximize commercial adoption.
-              </p>
+            <div style={styles.cardCentered}>
+              <h3 style={styles.cardCenteredTitle}>Commercial Strategy & Market Entry</h3>
             </div>
-            <div style={styles.card}>
-              <h3 style={styles.cardTitle}>Corporate Advisory & Board Work</h3>
-              <p style={styles.cardText}>
-                Providing executive mentorship, product roadmap alignment, and strategic positioning for digital pathology startups and diagnostic innovators.
-              </p>
+            <div style={styles.cardCentered}>
+              <h3 style={styles.cardCenteredTitle}>Corporate Advisory & Board Work</h3>
             </div>
-            <div style={styles.card}>
-              <h3 style={styles.cardTitle}>Market Access & Commercial Economics</h3>
-              <p style={styles.cardText}>
-                Navigating customer adoption drivers, CPT add-on code frameworks, and economic trends shaping hospital and laboratory purchasing decisions.
-              </p>
+            <div style={styles.cardCentered}>
+              <h3 style={styles.cardCenteredTitle}>Market Access & Commercial Economics</h3>
             </div>
           </section>
 
-          {/* Industry Insights Section (Teal Accent Divider) */}
+          {/* Industry Insights Section */}
           <div style={styles.sectionDivider}>
             <div style={styles.sectionLabel}>
               Industry Insights
             </div>
 
             <section style={styles.tableCard}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '12px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', items: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '12px' }}>
                 <div>
-                  <h3 style={{ ...styles.cardTitle, margin: 0 }}>
+                  <h3 style={{ ...styles.cardCenteredTitle, textAlign: 'left', fontSize: '18px', margin: 0 }}>
                     Digital Pathology Regulatory Clearances (2017 - 2026)
                   </h3>
-                  <p style={{ ...styles.cardText, fontSize: '12px', marginTop: '4px', color: '#64748b' }}>
+                  <p style={{ fontSize: '12px', marginTop: '4px', color: '#64748b', margin: 0 }}>
                     FDA clearance volumes across core product codes (PSY, QKQ, SIX, QYV, QPN, SFH, SHW)
                   </p>
                 </div>
@@ -640,8 +640,8 @@ export default function App() {
         <main style={styles.container}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
             <div>
-              <h2 style={{ ...styles.cardTitle, fontSize: '24px' }}>Digital Pathology Regulatory Radar</h2>
-              <p style={styles.cardText}>Real-time FDA openFDA multi-endpoint feed across core pathology product codes</p>
+              <h2 style={{ ...styles.cardCenteredTitle, fontSize: '24px', textAlign: 'left' }}>Digital Pathology Regulatory Radar</h2>
+              <p style={{ fontSize: '14px', color: '#94a3b8', margin: '4px 0 0 0' }}>Real-time openFDA multi-endpoint feed across core pathology product codes</p>
             </div>
             <div style={styles.btnGroup}>
               <button onClick={copyMarkdownTable} style={styles.primaryBtn}>
@@ -721,8 +721,8 @@ export default function App() {
             <span style={{ ...styles.pill(1), fontSize: '12px' }}>{selectedRecord.product_code} | {selectedRecord.k_number}</span>
             <button onClick={() => setSelectedRecord(null)} style={{ background: 'none', border: 'none', color: '#94a3b8', fontSize: '20px', cursor: 'pointer' }}>✕</button>
           </div>
-          <h2 style={{ ...styles.cardTitle, fontSize: '20px' }}>{selectedRecord.device_name}</h2>
-          <p style={styles.cardText}>{selectedRecord.applicant}</p>
+          <h2 style={{ ...styles.cardCenteredTitle, fontSize: '20px', textAlign: 'left' }}>{selectedRecord.device_name}</h2>
+          <p style={{ fontSize: '14px', color: '#cbd5e1', margin: 0 }}>{selectedRecord.applicant}</p>
           <div style={{ backgroundColor: '#0f172a', padding: '16px', borderRadius: '8px', border: '1px solid #334155' }}>
             <span style={{ fontSize: '11px', color: '#94a3b8', textTransform: 'uppercase', fontWeight: 'bold' }}>Summary Statement</span>
             <p style={{ fontSize: '13px', color: '#cbd5e1', lineHeight: '1.5', marginTop: '8px' }}>{selectedRecord.intended_use}</p>
