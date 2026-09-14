@@ -172,7 +172,7 @@ export default function App() {
   const styles = {
     wrapper: {
       minHeight: '100vh',
-      backgroundColor: '#0f172a',
+      backgroundColor: '#090d16',
       color: '#f8fafc',
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
       display: 'flex',
@@ -237,44 +237,93 @@ export default function App() {
       flexDirection: 'column',
       gap: '32px'
     },
-    hero: {
-      backgroundColor: '#1e293b',
+    // Lightened, Differentiated Hero Card
+    heroCard: {
+      backgroundColor: '#243044',
       borderRadius: '16px',
-      border: '1px solid #334155',
-      padding: '40px',
+      border: '1px solid #475569',
+      padding: '44px',
+      boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.4)',
+      display: 'flex',
+      gap: '40px',
+      alignItems: 'center',
+      flexWrap: 'wrap-reverse'
+    },
+    heroContent: {
+      flex: '1 1 600px',
       display: 'flex',
       flexDirection: 'column',
       gap: '20px'
     },
     heroTitle: {
-      fontSize: '36px',
+      fontSize: '38px',
       fontWeight: '800',
       color: '#ffffff',
       lineHeight: '1.2',
-      margin: 0
+      margin: 0,
+      letterSpacing: '-0.02em'
     },
     heroDesc: {
       fontSize: '16px',
       color: '#cbd5e1',
       lineHeight: '1.6',
+      margin: 0
+    },
+    headshotContainer: {
+      flex: '0 0 160px',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      gap: '12px'
+    },
+    headshotPlaceholder: {
+      width: '150px',
+      height: '150px',
+      borderRadius: '50%',
+      backgroundColor: '#1e293b',
+      border: '3px solid #2dd4bf',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: '#94a3b8',
+      fontSize: '13px',
+      fontWeight: '600',
+      overflow: 'hidden',
+      textAlign: 'center',
+      boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.3)'
+    },
+    headshotLabel: {
+      fontSize: '13px',
+      fontWeight: '700',
+      color: '#ffffff',
+      textAlign: 'center',
+      margin: 0
+    },
+    headshotSub: {
+      fontSize: '11px',
+      color: '#2dd4bf',
+      textAlign: 'center',
       margin: 0,
-      maxWidth: '900px'
+      fontFamily: 'monospace'
     },
     btnGroup: {
       display: 'flex',
       gap: '12px',
+      alignItems: 'center',
       flexWrap: 'wrap',
       marginTop: '8px'
     },
     primaryBtn: {
       backgroundColor: '#0d9488',
       color: '#ffffff',
-      padding: '12px 24px',
+      padding: '12px 28px',
       borderRadius: '8px',
       fontWeight: '600',
       fontSize: '14px',
       border: 'none',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      textDecoration: 'none',
+      display: 'inline-block'
     },
     secondaryBtn: {
       backgroundColor: '#334155',
@@ -284,8 +333,18 @@ export default function App() {
       fontWeight: '600',
       fontSize: '14px',
       textDecoration: 'none',
-      display: 'inline-block'
+      display: 'inline-block',
+      border: '1px solid #475569'
     },
+    trustSignalRow: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '8px',
+      marginTop: '8px',
+      fontSize: '12px',
+      color: '#94a3b8'
+    },
+    // Lightened, Differentiated Strategy Cards
     grid3: {
       display: 'grid',
       gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
@@ -295,10 +354,11 @@ export default function App() {
       backgroundColor: '#1e293b',
       border: '1px solid #334155',
       borderRadius: '12px',
-      padding: '24px',
+      padding: '28px',
       display: 'flex',
       flexDirection: 'column',
-      gap: '12px'
+      gap: '12px',
+      boxShadow: '0 10px 15px -3px rgba(0,0,0,0.2)'
     },
     cardTitle: {
       fontSize: '18px',
@@ -308,14 +368,15 @@ export default function App() {
     },
     cardText: {
       fontSize: '14px',
-      color: '#94a3b8',
-      lineHeight: '1.5',
+      color: '#cbd5e1',
+      lineHeight: '1.6',
       margin: 0
     },
+    // Distinct Industry Insights Section Divider
     sectionDivider: {
-      marginTop: '16px',
-      paddingTop: '24px',
-      borderTop: '1px solid #334155'
+      marginTop: '20px',
+      paddingTop: '28px',
+      borderTop: '1px solid #1e293b'
     },
     sectionLabel: {
       fontSize: '12px',
@@ -323,8 +384,11 @@ export default function App() {
       fontWeight: '700',
       color: '#2dd4bf',
       textTransform: 'uppercase',
-      letterSpacing: '0.1em',
-      marginBottom: '8px'
+      letterSpacing: '0.12em',
+      marginBottom: '12px',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '8px'
     },
     tableCard: {
       backgroundColor: '#0b1329',
@@ -425,28 +489,58 @@ export default function App() {
       {/* OVERVIEW TAB */}
       {activeTab === 'overview' && (
         <main style={styles.container}>
-          <section style={styles.hero}>
-            <h2 style={styles.heroTitle}>
-              Strategy, Commercialization and Success in Digital Pathology
-            </h2>
-            <p style={styles.heroDesc}>
-              Rivers Strategic Advisors is guiding early-stage innovators, corporate boards, and diagnostic leaders through market entry, regulatory label strategies (IVD/IUO/RUO), and the evolving commercial economics of digital diagnostics.
-            </p>
-            <div style={styles.btnGroup}>
-              <a href="mailto:michael@strategicrivers.com" style={styles.primaryBtn}>
-                Contact Me
-              </a>
-              <a 
-                href="https://www.linkedin.com/in/michael-rivers-digitalpathology" 
-                target="_blank" 
-                rel="noreferrer" 
-                style={styles.secondaryBtn}
-              >
-                LinkedIn Profile
-              </a>
+          {/* Lightened, High-Contrast Top Hero Section */}
+          <section style={styles.heroCard}>
+            <div style={styles.heroContent}>
+              <h2 style={styles.heroTitle}>
+                Strategy, Commercialization and Success in Digital Pathology
+              </h2>
+              <p style={styles.heroDesc}>
+                Rivers Strategic Advisors is guiding early-stage innovators, corporate boards, and diagnostic leaders through market entry, regulatory label strategies (IVD/IUO/RUO), and the evolving commercial economics of digital diagnostics.
+              </p>
+
+              <div style={styles.btnGroup}>
+                <a href="mailto:michael@strategicrivers.com" style={styles.primaryBtn}>
+                  Contact Me
+                </a>
+                <a 
+                  href="https://www.linkedin.com/in/michael-rivers-digitalpathology" 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  style={styles.secondaryBtn}
+                >
+                  LinkedIn Profile
+                </a>
+              </div>
+
+              <div style={styles.trustSignalRow}>
+                <span style={{ color: '#2dd4bf', fontWeight: 'bold' }}>•</span>
+                <span>Active Board Member & Governance Advisor to four innovative digital pathology startups.</span>
+              </div>
+            </div>
+
+            {/* Headshot Anchor */}
+            <div style={styles.headshotContainer}>
+              <div style={styles.headshotPlaceholder}>
+                {/* Replace src attribute once image file is placed in public folder */}
+                <img 
+                  src="/headshot.jpg" 
+                  alt="Michael Rivers" 
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.parentNode.innerText = 'Michael Rivers';
+                  }}
+                />
+              </div>
+              <div>
+                <p style={styles.headshotLabel}>Michael Rivers</p>
+                <p style={styles.headshotSub}>Managing Director</p>
+              </div>
             </div>
           </section>
 
+          {/* Differentiated Strategic Pillar Cards */}
           <section style={styles.grid3}>
             <div style={styles.card}>
               <h3 style={styles.cardTitle}>Commercial Strategy & Market Entry</h3>
@@ -468,16 +562,19 @@ export default function App() {
             </div>
           </section>
 
-          {/* Industry Insights Section */}
+          {/* Industry Insights Section (Darker Slate Feed) */}
           <div style={styles.sectionDivider}>
-            <div style={styles.sectionLabel}>Industry Insights</div>
+            <div style={styles.sectionLabel}>
+              <span>📊</span> Industry Insights
+            </div>
+
             <section style={styles.tableCard}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '12px' }}>
                 <div>
                   <h3 style={{ ...styles.cardTitle, margin: 0 }}>
                     Digital Pathology Regulatory Clearances (2017 - 2026)
                   </h3>
-                  <p style={{ ...styles.cardText, fontSize: '12px', marginTop: '4px' }}>
+                  <p style={{ ...styles.cardText, fontSize: '12px', marginTop: '4px', color: '#64748b' }}>
                     FDA clearance volumes across core product codes (PSY, QKQ, SIX, QYV, QPN, SFH, SHW)
                   </p>
                 </div>
