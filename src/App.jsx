@@ -339,14 +339,20 @@ export default function App() {
       display: 'inline-block',
       border: '1px solid #64748b'
     },
+    trustSignalContainer: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '8px',
+      marginTop: '8px'
+    },
     trustSignalRow: {
       display: 'flex',
-      alignItems: 'center',
+      alignItems: 'flex-start',
       gap: '10px',
-      marginTop: '12px',
       fontSize: '14px',
       color: '#f1f5f9',
-      fontWeight: '500'
+      fontWeight: '500',
+      lineHeight: '1.4'
     },
     grid3: {
       display: 'grid',
@@ -514,9 +520,15 @@ export default function App() {
                 </a>
               </div>
 
-              <div style={styles.trustSignalRow}>
-                <span style={{ color: '#2dd4bf', fontSize: '18px', fontWeight: 'bold' }}>•</span>
-                <span>Active Board Member & Strategic Advisor to four innovative digital pathology startups.</span>
+              <div style={styles.trustSignalContainer}>
+                <div style={styles.trustSignalRow}>
+                  <span style={{ color: '#2dd4bf', fontSize: '18px', fontWeight: 'bold' }}>•</span>
+                  <span>Active Board Member & Strategic Advisor to four innovative digital pathology startups.</span>
+                </div>
+                <div style={styles.trustSignalRow}>
+                  <span style={{ color: '#2dd4bf', fontSize: '18px', fontWeight: 'bold' }}>•</span>
+                  <span>Board member of the Digital Pathology Association (DPA), President of the Digital Pathology Association Foundation and Co-Chair of the DPA Reimbursement Task Force</span>
+                </div>
               </div>
             </div>
 
