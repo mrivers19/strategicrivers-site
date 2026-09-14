@@ -237,7 +237,6 @@ export default function App() {
       flexDirection: 'column',
       gap: '32px'
     },
-    // High-Contrast Lightened Hero Card
     heroCard: {
       backgroundColor: '#334155',
       backgroundImage: 'linear-gradient(135deg, #334155 0%, #243044 100%)',
@@ -278,7 +277,6 @@ export default function App() {
       justifyContent: 'center',
       gap: '12px'
     },
-    // Photo Frame with Image Positioning Fix
     headshotPlaceholder: {
       width: '150px',
       height: '150px',
@@ -295,7 +293,7 @@ export default function App() {
       width: '100%',
       height: '100%',
       objectFit: 'cover',
-      objectPosition: 'center 20%' // Centering offset to move face down into frame
+      objectPosition: 'center 20%'
     },
     headshotLabel: {
       fontSize: '14px',
@@ -355,7 +353,6 @@ export default function App() {
       gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
       gap: '20px'
     },
-    // High-Contrast Lightened Strategy Cards
     card: {
       backgroundColor: '#293548',
       border: '1px solid #475569',
@@ -378,25 +375,22 @@ export default function App() {
       lineHeight: '1.6',
       margin: 0
     },
-// Inside the styles object in src/App.jsx:
-
-sectionDivider: {
-  marginTop: '36px',
-  paddingTop: '36px',
-  borderTop: '2px solid #2dd4bf', // High-visibility teal divider line
-  boxShadow: '0 -4px 12px rgba(45, 212, 191, 0.15)' // Subtle glow underneath
-},
-
-sectionLabel: {
-  fontSize: '20px', // Prominent section heading
-  fontFamily: 'monospace',
-  fontWeight: '800',
-  color: '#2dd4bf',
-  textTransform: 'uppercase',
-  letterSpacing: '0.1em',
-  marginBottom: '20px',
-  display: 'block'
-},
+    sectionDivider: {
+      marginTop: '36px',
+      paddingTop: '36px',
+      borderTop: '2px solid #2dd4bf',
+      boxShadow: '0 -4px 12px rgba(45, 212, 191, 0.15)'
+    },
+    sectionLabel: {
+      fontSize: '20px',
+      fontFamily: 'monospace',
+      fontWeight: '800',
+      color: '#2dd4bf',
+      textTransform: 'uppercase',
+      letterSpacing: '0.1em',
+      marginBottom: '20px',
+      display: 'block'
+    },
     tableCard: {
       backgroundColor: '#0b1329',
       border: '1px solid #1e293b',
@@ -568,16 +562,11 @@ sectionLabel: {
             </div>
           </section>
 
-       {/* Industry Insights Section */}
-<div style={styles.sectionDivider}>
-  <div style={styles.sectionLabel}>
-    Industry Insights
-  </div>
-
-  <section style={styles.tableCard}>
-    {/* Table content remains unchanged */}
-  </section>
-</div>
+          {/* Industry Insights Section (Teal Accent Divider) */}
+          <div style={styles.sectionDivider}>
+            <div style={styles.sectionLabel}>
+              Industry Insights
+            </div>
 
             <section style={styles.tableCard}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '12px' }}>
