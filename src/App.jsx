@@ -246,17 +246,6 @@ export default function App() {
       flexDirection: 'column',
       gap: '20px'
     },
-    badge: {
-      alignSelf: 'flex-start',
-      backgroundColor: '#134e4a',
-      color: '#2dd4bf',
-      border: '1px solid #0d9488',
-      padding: '4px 12px',
-      borderRadius: '20px',
-      fontSize: '12px',
-      fontWeight: '600',
-      fontFamily: 'monospace'
-    },
     heroTitle: {
       fontSize: '36px',
       fontWeight: '800',
@@ -323,12 +312,27 @@ export default function App() {
       lineHeight: '1.5',
       margin: 0
     },
+    sectionDivider: {
+      marginTop: '16px',
+      paddingTop: '24px',
+      borderTop: '1px solid #334155'
+    },
+    sectionLabel: {
+      fontSize: '12px',
+      fontFamily: 'monospace',
+      fontWeight: '700',
+      color: '#2dd4bf',
+      textTransform: 'uppercase',
+      letterSpacing: '0.1em',
+      marginBottom: '8px'
+    },
     tableCard: {
-      backgroundColor: '#1e293b',
-      border: '1px solid #334155',
+      backgroundColor: '#0b1329',
+      border: '1px solid #1e293b',
       borderRadius: '12px',
       padding: '24px',
-      overflowX: 'auto'
+      overflowX: 'auto',
+      boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.4)'
     },
     table: {
       width: '100%',
@@ -337,21 +341,21 @@ export default function App() {
       fontSize: '12px'
     },
     th: {
-      backgroundColor: '#0f172a',
+      backgroundColor: '#070d19',
       color: '#94a3b8',
       padding: '10px 12px',
-      borderBottom: '1px solid #334155',
+      borderBottom: '1px solid #1e293b',
       fontWeight: '600',
       whiteSpace: 'nowrap'
     },
     td: {
       padding: '10px 12px',
-      borderBottom: '1px solid #334155',
+      borderBottom: '1px solid #1e293b',
       color: '#cbd5e1'
     },
     pill: (val) => ({
       backgroundColor: val > 0 ? '#134e4a' : 'transparent',
-      color: val > 0 ? '#2dd4bf' : '#64748b',
+      color: val > 0 ? '#2dd4bf' : '#475569',
       border: val > 0 ? '1px solid #0d9488' : 'none',
       padding: '2px 8px',
       borderRadius: '4px',
@@ -422,23 +426,18 @@ export default function App() {
       {activeTab === 'overview' && (
         <main style={styles.container}>
           <section style={styles.hero}>
-            <span style={styles.badge}>Strategic Advisory & Governance</span>
             <h2 style={styles.heroTitle}>
-              Commercial Strategy & Strategic Positioning in Digital Pathology
+              Strategy, Commercialization and Success in Digital Pathology
             </h2>
             <p style={styles.heroDesc}>
-              Guiding early-stage innovators, corporate boards, and diagnostic leaders through market entry, 
-              regulatory label strategies (IVD vs. RUO), and the evolving commercial economics of digital diagnostics.
+              Rivers Strategic Advisors is guiding early-stage innovators, corporate boards, and diagnostic leaders through market entry, regulatory label strategies (IVD/IUO/RUO), and the evolving commercial economics of digital diagnostics.
             </p>
             <div style={styles.btnGroup}>
-              <button onClick={() => setActiveTab('radar')} style={styles.primaryBtn}>
-                Launch Regulatory Radar Tool →
-              </button>
-              <a href="mailto:michael@strategicrivers.com" style={styles.secondaryBtn}>
-                Contact Advisor
+              <a href="mailto:michael@strategicrivers.com" style={styles.primaryBtn}>
+                Contact Me
               </a>
               <a 
-                href="https://www.linkedin.com/in/michael-rivers-ca/" 
+                href="https://www.linkedin.com/in/michael-rivers-digitalpathology" 
                 target="_blank" 
                 rel="noreferrer" 
                 style={styles.secondaryBtn}
@@ -469,58 +468,61 @@ export default function App() {
             </div>
           </section>
 
-          {/* Restored Full Matrix Table on Overview Tab */}
-          <section style={styles.tableCard}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '12px' }}>
-              <div>
-                <h3 style={{ ...styles.cardTitle, margin: 0 }}>
-                  Digital Pathology Regulatory Matrix (2017–2026)
-                </h3>
-                <p style={{ ...styles.cardText, fontSize: '12px', marginTop: '4px' }}>
-                  FDA clearance volumes across core product codes (PSY, QKQ, SIX, QYV, QPN, SFH, SHW)
-                </p>
+          {/* Industry Insights Section */}
+          <div style={styles.sectionDivider}>
+            <div style={styles.sectionLabel}>Industry Insights</div>
+            <section style={styles.tableCard}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '12px' }}>
+                <div>
+                  <h3 style={{ ...styles.cardTitle, margin: 0 }}>
+                    Digital Pathology Regulatory Clearances (2017 - 2026)
+                  </h3>
+                  <p style={{ ...styles.cardText, fontSize: '12px', marginTop: '4px' }}>
+                    FDA clearance volumes across core product codes (PSY, QKQ, SIX, QYV, QPN, SFH, SHW)
+                  </p>
+                </div>
+                <button onClick={() => setActiveTab('radar')} style={styles.secondaryBtn}>
+                  Explore Full Database ({records.length} Clearances) →
+                </button>
               </div>
-              <button onClick={() => setActiveTab('radar')} style={styles.primaryBtn}>
-                Explore Full Database ({records.length} Clearances) →
-              </button>
-            </div>
 
-            <div style={{ overflowX: 'auto' }}>
-              <table style={styles.table}>
-                <thead>
-                  <tr>
-                    <th style={styles.th}>Code</th>
-                    <th style={styles.th}>Category Title & Scope</th>
-                    {analyticsMatrix.years.map(y => (
-                      <th key={y} style={{ ...styles.th, textAlign: 'center' }}>{y}</th>
-                    ))}
-                    <th style={{ ...styles.th, textAlign: 'right', color: '#2dd4bf' }}>Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {analyticsMatrix.codes.map(code => (
-                    <tr key={code}>
-                      <td style={{ ...styles.td, fontFamily: 'monospace', fontWeight: 'bold', color: '#2dd4bf' }}>{code}</td>
-                      <td style={{ ...styles.td, color: '#ffffff', fontWeight: '500' }}>
-                        {CODE_TAXONOMY[code]?.title}
-                        <span style={{ color: '#64748b', fontSize: '11px', marginLeft: '6px' }}>({CODE_TAXONOMY[code]?.reg})</span>
-                      </td>
+              <div style={{ overflowX: 'auto' }}>
+                <table style={styles.table}>
+                  <thead>
+                    <tr>
+                      <th style={styles.th}>Code</th>
+                      <th style={styles.th}>Category Title & Scope</th>
                       {analyticsMatrix.years.map(y => (
-                        <td key={y} style={{ ...styles.td, textAlign: 'center' }}>
-                          <span style={styles.pill(analyticsMatrix.matrix[code][y])}>
-                            {analyticsMatrix.matrix[code][y]}
-                          </span>
-                        </td>
+                        <th key={y} style={{ ...styles.th, textAlign: 'center' }}>{y}</th>
                       ))}
-                      <td style={{ ...styles.td, textAlign: 'right', fontFamily: 'monospace', fontWeight: 'bold', color: '#2dd4bf', fontSize: '13px' }}>
-                        {analyticsMatrix.matrix[code]["Total"]}
-                      </td>
+                      <th style={{ ...styles.th, textAlign: 'right', color: '#2dd4bf' }}>Total</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </section>
+                  </thead>
+                  <tbody>
+                    {analyticsMatrix.codes.map(code => (
+                      <tr key={code}>
+                        <td style={{ ...styles.td, fontFamily: 'monospace', fontWeight: 'bold', color: '#2dd4bf' }}>{code}</td>
+                        <td style={{ ...styles.td, color: '#ffffff', fontWeight: '500' }}>
+                          {CODE_TAXONOMY[code]?.title}
+                          <span style={{ color: '#64748b', fontSize: '11px', marginLeft: '6px' }}>({CODE_TAXONOMY[code]?.reg})</span>
+                        </td>
+                        {analyticsMatrix.years.map(y => (
+                          <td key={y} style={{ ...styles.td, textAlign: 'center' }}>
+                            <span style={styles.pill(analyticsMatrix.matrix[code][y])}>
+                              {analyticsMatrix.matrix[code][y]}
+                            </span>
+                          </td>
+                        ))}
+                        <td style={{ ...styles.td, textAlign: 'right', fontFamily: 'monospace', fontWeight: 'bold', color: '#2dd4bf', fontSize: '13px' }}>
+                          {analyticsMatrix.matrix[code]["Total"]}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
         </main>
       )}
 
@@ -550,7 +552,7 @@ export default function App() {
             style={styles.input}
           />
 
-          <div style={styles.tableCard}>
+          <div style={{ ...styles.tableCard, backgroundColor: '#1e293b', border: '1px solid #334155' }}>
             <table style={styles.table}>
               <thead>
                 <tr>
@@ -607,7 +609,7 @@ export default function App() {
       {selectedRecord && (
         <div style={styles.drawer}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={styles.badge}>{selectedRecord.product_code} | {selectedRecord.k_number}</span>
+            <span style={{ ...styles.pill(1), fontSize: '12px' }}>{selectedRecord.product_code} | {selectedRecord.k_number}</span>
             <button onClick={() => setSelectedRecord(null)} style={{ background: 'none', border: 'none', color: '#94a3b8', fontSize: '20px', cursor: 'pointer' }}>✕</button>
           </div>
           <h2 style={{ ...styles.cardTitle, fontSize: '20px' }}>{selectedRecord.device_name}</h2>
