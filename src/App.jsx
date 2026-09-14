@@ -438,7 +438,7 @@ export default function App() {
                 Contact Advisor
               </a>
               <a 
-                href="https://www.linkedin.com/in/michael-rivers-digitalpathology" 
+                href="https://www.linkedin.com/in/michael-rivers-ca/" 
                 target="_blank" 
                 rel="noreferrer" 
                 style={styles.secondaryBtn}
