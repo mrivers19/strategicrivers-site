@@ -196,17 +196,11 @@ export default function App() {
       flexWrap: 'wrap',
       gap: '16px'
     },
-    title: {
-      fontSize: '24px',
-      fontWeight: '800',
-      color: '#ffffff',
-      margin: 0
-    },
-    subtitle: {
+    headerTagline: {
       fontSize: '13px',
       color: '#94a3b8',
-      margin: '4px 0 0 0',
-      fontFamily: 'monospace'
+      fontFamily: 'monospace',
+      letterSpacing: '0.05em'
     },
     navGroup: {
       display: 'flex',
@@ -264,7 +258,7 @@ export default function App() {
       letterSpacing: '-0.02em'
     },
     heroSubtitle: {
-      fontSize: '22px',
+      fontSize: '26px', // Increased font size for higher emphasis
       fontWeight: '700',
       color: '#2dd4bf',
       lineHeight: '1.3',
@@ -471,11 +465,8 @@ export default function App() {
       {/* Executive Header */}
       <header style={styles.header}>
         <div style={styles.headerContainer}>
-          <div>
-            <h1 style={styles.title}>
-              Rivers Strategic Advisors <span style={{ color: '#2dd4bf' }}>LLC</span>
-            </h1>
-            <p style={styles.subtitle}>Digital Diagnostics & Commercialization Advisory | Sunnyvale, CA</p>
+          <div style={styles.headerTagline}>
+            Sunnyvale, CA | Digital Pathology Advisory
           </div>
 
           <div style={styles.navGroup}>
@@ -516,7 +507,7 @@ export default function App() {
                   Contact Me
                 </a>
                 <a 
-                  href="https://www.linkedin.com/in/michael-rivers-digitalpathology" 
+                  href="https://www.linkedin.com/in/michael-rivers-ca/" 
                   target="_blank" 
                   rel="noreferrer" 
                   style={styles.secondaryBtn}
@@ -528,7 +519,7 @@ export default function App() {
               <div style={styles.trustSignalContainer}>
                 <div style={styles.trustSignalRow}>
                   <span style={{ color: '#2dd4bf', fontSize: '18px', fontWeight: 'bold' }}>•</span>
-                  <span>Former VP, Roche Diagnostics with 20+ years of experience in Diagnostics and Digital Pathology</span>
+                  <span>Former VP, Roche Diagnostics, with 20+ years of experience in Diagnostics and Digital Pathology</span>
                 </div>
                 <div style={styles.trustSignalRow}>
                   <span style={{ color: '#2dd4bf', fontSize: '18px', fontWeight: 'bold' }}>•</span>
@@ -556,7 +547,7 @@ export default function App() {
               </div>
               <div>
                 <p style={styles.headshotLabel}>Michael Rivers</p>
-                <p style={styles.headshotSub}>Managing Director</p>
+                <p style={styles.headshotSub}>Founder</p>
               </div>
             </div>
           </section>
@@ -581,7 +572,7 @@ export default function App() {
             </div>
 
             <section style={styles.tableCard}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', items: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '12px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '12px' }}>
                 <div>
                   <h3 style={{ ...styles.cardCenteredTitle, textAlign: 'left', fontSize: '18px', margin: 0 }}>
                     Digital Pathology Regulatory Clearances (2017 - 2026)
