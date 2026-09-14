@@ -111,7 +111,7 @@ export default function App() {
       uniqueRecords.sort((a, b) => b.timestamp - a.timestamp);
       setRecords(uniqueRecords);
     } catch (err) {
-      console.error("Error executing multi-endpoint openFDA fetch:", err);
+      console.error("Error fetching openFDA data:", err);
     } finally {
       setLoading(false);
     }
@@ -169,447 +169,428 @@ export default function App() {
     setTimeout(() => setCopiedStatus(false), 2500);
   };
 
+  const styles = {
+    wrapper: {
+      minHeight: '100vh',
+      backgroundColor: '#0f172a',
+      color: '#f8fafc',
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+      display: 'flex',
+      flexDirection: 'column'
+    },
+    header: {
+      backgroundColor: '#1e293b',
+      borderBottom: '1px solid #334155',
+      padding: '20px 32px',
+      position: 'sticky',
+      top: 0,
+      zIndex: 30,
+      boxShadow: '0 10px 15px -3px rgba(0,0,0,0.3)'
+    },
+    headerContainer: {
+      maxWidth: '1400px',
+      margin: '0 auto',
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      flexWrap: 'wrap',
+      gap: '16px'
+    },
+    title: {
+      fontSize: '24px',
+      fontWeight: '800',
+      color: '#ffffff',
+      margin: 0
+    },
+    subtitle: {
+      fontSize: '13px',
+      color: '#94a3b8',
+      margin: '4px 0 0 0',
+      fontFamily: 'monospace'
+    },
+    navGroup: {
+      display: 'flex',
+      gap: '8px',
+      backgroundColor: '#0f172a',
+      padding: '6px',
+      borderRadius: '10px',
+      border: '1px solid #334155'
+    },
+    navBtn: (active) => ({
+      padding: '10px 20px',
+      borderRadius: '6px',
+      fontSize: '13px',
+      fontWeight: '600',
+      border: 'none',
+      cursor: 'pointer',
+      backgroundColor: active ? '#0d9488' : 'transparent',
+      color: active ? '#ffffff' : '#94a3b8',
+      transition: 'all 0.2s ease'
+    }),
+    container: {
+      maxWidth: '1400px',
+      width: '100%',
+      margin: '0 auto',
+      padding: '40px 24px',
+      boxSizing: 'border-box',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '32px'
+    },
+    hero: {
+      backgroundColor: '#1e293b',
+      borderRadius: '16px',
+      border: '1px solid #334155',
+      padding: '40px',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '20px'
+    },
+    badge: {
+      alignSelf: 'flex-start',
+      backgroundColor: '#134e4a',
+      color: '#2dd4bf',
+      border: '1px solid #0d9488',
+      padding: '4px 12px',
+      borderRadius: '20px',
+      fontSize: '12px',
+      fontWeight: '600',
+      fontFamily: 'monospace'
+    },
+    heroTitle: {
+      fontSize: '36px',
+      fontWeight: '800',
+      color: '#ffffff',
+      lineHeight: '1.2',
+      margin: 0
+    },
+    heroDesc: {
+      fontSize: '16px',
+      color: '#cbd5e1',
+      lineHeight: '1.6',
+      margin: 0,
+      maxWidth: '900px'
+    },
+    btnGroup: {
+      display: 'flex',
+      gap: '12px',
+      flexWrap: 'wrap',
+      marginTop: '8px'
+    },
+    primaryBtn: {
+      backgroundColor: '#0d9488',
+      color: '#ffffff',
+      padding: '12px 24px',
+      borderRadius: '8px',
+      fontWeight: '600',
+      fontSize: '14px',
+      border: 'none',
+      cursor: 'pointer'
+    },
+    secondaryBtn: {
+      backgroundColor: '#334155',
+      color: '#f8fafc',
+      padding: '12px 24px',
+      borderRadius: '8px',
+      fontWeight: '600',
+      fontSize: '14px',
+      textDecoration: 'none',
+      display: 'inline-block'
+    },
+    grid3: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+      gap: '20px'
+    },
+    card: {
+      backgroundColor: '#1e293b',
+      border: '1px solid #334155',
+      borderRadius: '12px',
+      padding: '24px',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '12px'
+    },
+    cardTitle: {
+      fontSize: '18px',
+      fontWeight: '700',
+      color: '#ffffff',
+      margin: 0
+    },
+    cardText: {
+      fontSize: '14px',
+      color: '#94a3b8',
+      lineHeight: '1.5',
+      margin: 0
+    },
+    tableCard: {
+      backgroundColor: '#1e293b',
+      border: '1px solid #334155',
+      borderRadius: '12px',
+      padding: '24px',
+      overflowX: 'auto'
+    },
+    table: {
+      width: '100%',
+      borderCollapse: 'collapse',
+      textAlign: 'left',
+      fontSize: '13px'
+    },
+    th: {
+      backgroundColor: '#0f172a',
+      color: '#94a3b8',
+      padding: '12px',
+      borderBottom: '1px solid #334155',
+      fontWeight: '600'
+    },
+    td: {
+      padding: '12px',
+      borderBottom: '1px solid #334155',
+      color: '#cbd5e1'
+    },
+    input: {
+      width: '100%',
+      backgroundColor: '#0f172a',
+      border: '1px solid #334155',
+      borderRadius: '8px',
+      padding: '12px 16px',
+      color: '#ffffff',
+      fontSize: '14px',
+      boxSizing: 'border-box'
+    },
+    drawer: {
+      position: 'fixed',
+      top: 0,
+      right: 0,
+      bottom: 0,
+      width: '100%',
+      maxWidth: '500px',
+      backgroundColor: '#1e293b',
+      borderLeft: '1px solid #334155',
+      boxShadow: '-10px 0 25px rgba(0,0,0,0.5)',
+      zIndex: 50,
+      padding: '32px',
+      boxSizing: 'border-box',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '20px'
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-[#0f172a] text-slate-100 font-sans flex flex-col antialiased">
-      {/* Prominent Executive Header */}
-      <header className="bg-[#1e293b]/95 backdrop-blur-md border-b border-slate-800 px-6 py-6 sticky top-0 z-30 shadow-xl">
-        <div className="max-w-[1600px] mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-          <div className="cursor-pointer flex flex-col gap-1" onClick={() => setActiveTab('overview')}>
-            <h1 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
-              Rivers Strategic Advisors <span className="text-teal-400 font-mono text-lg md:text-xl font-medium">LLC</span>
+    <div style={styles.wrapper}>
+      {/* Executive Header */}
+      <header style={styles.header}>
+        <div style={styles.headerContainer}>
+          <div>
+            <h1 style={styles.title}>
+              Rivers Strategic Advisors <span style={{ color: '#2dd4bf' }}>LLC</span>
             </h1>
-            <p className="text-xs md:text-sm text-slate-400 font-mono tracking-wide">
-              Digital Diagnostics & Commercialization Advisory
-            </p>
+            <p style={styles.subtitle}>Digital Diagnostics & Commercialization Advisory | Sunnyvale, CA</p>
           </div>
 
-          <nav className="flex items-center gap-2 bg-[#0f172a] p-1.5 rounded-xl border border-slate-800">
+          <div style={styles.navGroup}>
             <button
               onClick={() => setActiveTab('overview')}
-              className={`text-xs md:text-sm px-5 py-2.5 rounded-lg font-semibold transition ${
-                activeTab === 'overview'
-                  ? 'bg-slate-800 text-teal-400 shadow-sm border border-slate-700'
-                  : 'text-slate-400 hover:text-white'
-              }`}
+              style={styles.navBtn(activeTab === 'overview')}
             >
               Practice Overview
             </button>
             <button
               onClick={() => setActiveTab('radar')}
-              className={`text-xs md:text-sm px-5 py-2.5 rounded-lg font-semibold transition ${
-                activeTab === 'radar'
-                  ? 'bg-teal-600 text-white shadow-sm'
-                  : 'text-slate-400 hover:text-white'
-              }`}
+              style={styles.navBtn(activeTab === 'radar')}
             >
               Regulatory Radar Tool
             </button>
-          </nav>
+          </div>
         </div>
       </header>
 
       {/* OVERVIEW TAB */}
       {activeTab === 'overview' && (
-        <div className="flex-1 max-w-[1400px] w-full mx-auto p-6 md:p-10 flex flex-col gap-12">
-          
-          {/* Hero Section */}
-          <section className="bg-gradient-to-b from-[#1e293b] to-[#0f172a] p-8 md:p-12 rounded-2xl border border-slate-800 shadow-xl flex flex-col gap-6">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="text-xs font-mono bg-teal-950/80 text-teal-300 border border-teal-500/30 px-3 py-1 rounded-full">
-                Strategic Advisory & Governance
-              </span>
-              <span className="text-xs font-mono bg-slate-800 text-slate-300 border border-slate-700 px-3 py-1 rounded-full">
-                Sunnyvale, CA
-              </span>
-            </div>
-
-            <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight max-w-4xl">
+        <main style={styles.container}>
+          <section style={styles.hero}>
+            <span style={styles.badge}>Strategic Advisory & Governance</span>
+            <h2 style={styles.heroTitle}>
               Commercial Strategy & Strategic Positioning in Digital Pathology
             </h2>
-
-            <p className="text-slate-300 text-base md:text-lg leading-relaxed max-w-3xl">
+            <p style={styles.heroDesc}>
               Guiding early-stage innovators, corporate boards, and diagnostic leaders through market entry, 
-              regulatory label strategies (IVD vs. RUO), and the evolving economics of digital diagnostics.
+              regulatory label strategies (IVD vs. RUO), and the evolving commercial economics of digital diagnostics.
             </p>
-
-            <div className="pt-2 flex flex-wrap items-center gap-4">
-              <button
-                onClick={() => setActiveTab('radar')}
-                className="bg-teal-600 hover:bg-teal-500 text-white px-5 py-3 rounded-xl text-sm font-semibold transition flex items-center gap-2 shadow-lg shadow-teal-950/50"
-              >
+            <div style={styles.btnGroup}>
+              <button onClick={() => setActiveTab('radar')} style={styles.primaryBtn}>
                 Launch Regulatory Radar Tool →
               </button>
-              <a
-                href="mailto:michael@strategicrivers.com"
-                className="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-5 py-3 rounded-xl text-sm font-medium transition"
-              >
-                Contact Me
+              <a href="mailto:michael@strategicrivers.com" style={styles.secondaryBtn}>
+                Contact Advisor
               </a>
-              <a
-                href="https://www.linkedin.com/in/michael-rivers-digitalpathology"
-                target="_blank"
-                rel="noreferrer"
-                className="bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 px-4 py-3 rounded-xl text-sm font-medium transition flex items-center gap-2"
-                title="LinkedIn Profile"
+              <a 
+                href="https://www.linkedin.com/in/michael-rivers-digitalpathology" 
+                target="_blank" 
+                rel="noreferrer" 
+                style={styles.secondaryBtn}
               >
-                <svg className="w-4 h-4 fill-current text-teal-400" viewBox="0 0 24 24">
-                  <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.72a1.47 1.47 0 1 0 0 2.94 1.47 1.47 0 0 0 0-2.94Z"/>
-                </svg>
-                LinkedIn
+                LinkedIn Profile
               </a>
             </div>
           </section>
 
-          {/* Strategic Focus Areas */}
-          <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-[#1e293b] p-6 rounded-2xl border border-slate-800 flex flex-col gap-3">
-              <h3 className="text-lg font-bold text-white">Commercial Strategy & Market Entry</h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
+          <section style={styles.grid3}>
+            <div style={styles.card}>
+              <h3 style={styles.cardTitle}>Commercial Strategy & Market Entry</h3>
+              <p style={styles.cardText}>
                 Structuring go-to-market execution, global distribution strategy, and regulatory label positioning (IVD vs. RUO) to maximize commercial adoption.
               </p>
             </div>
-
-            <div className="bg-[#1e293b] p-6 rounded-2xl border border-slate-800 flex flex-col gap-3">
-              <h3 className="text-lg font-bold text-white">Corporate Advisory & Board Work</h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
+            <div style={styles.card}>
+              <h3 style={styles.cardTitle}>Corporate Advisory & Board Work</h3>
+              <p style={styles.cardText}>
                 Providing executive mentorship, product roadmap alignment, and strategic positioning for digital pathology startups and diagnostic innovators.
               </p>
             </div>
-
-            <div className="bg-[#1e293b] p-6 rounded-2xl border border-slate-800 flex flex-col gap-3">
-              <h3 className="text-lg font-bold text-white">Market Access & Commercial Economics</h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
+            <div style={styles.card}>
+              <h3 style={styles.cardTitle}>Market Access & Commercial Economics</h3>
+              <p style={styles.cardText}>
                 Navigating customer adoption drivers, CPT add-on code frameworks, and economic trends shaping hospital and laboratory purchasing decisions.
               </p>
             </div>
           </section>
 
-          {/* Industry Leadership Section */}
-          <section className="bg-[#1e293b] p-8 rounded-2xl border border-slate-800 flex flex-col gap-6">
-            <h3 className="text-base font-bold text-white uppercase tracking-wider">Industry Leadership</h3>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-              <div className="bg-[#0f172a] p-4 rounded-xl border border-slate-800 flex flex-col gap-1">
-                <span className="text-teal-400 font-semibold">Co-Chair & Founder</span>
-                <span className="text-white font-medium">Digital Pathology Association Reimbursement Task Force</span>
-              </div>
-              <div className="bg-[#0f172a] p-4 rounded-xl border border-slate-800 flex flex-col gap-1">
-                <span className="text-teal-400 font-semibold">Lead</span>
-                <span className="text-white font-medium">DPA Annual Reimbursement Workshop (Pathology Visions)</span>
-              </div>
-              <div className="bg-[#0f172a] p-4 rounded-xl border border-slate-800 flex flex-col gap-1">
-                <span className="text-teal-400 font-semibold">Board Member & Officer</span>
-                <span className="text-white font-medium">Digital Pathology Association & President, DPA Foundation</span>
-              </div>
-              <div className="bg-[#0f172a] p-4 rounded-xl border border-slate-800 flex flex-col gap-1">
-                <span className="text-teal-400 font-semibold">20+ Years Medical Diagnostics Leadership</span>
-                <span className="text-white font-medium">Former VP of Digital Pathology Lifecycle, Roche</span>
-              </div>
-            </div>
-          </section>
-
-          {/* Matrix Widget */}
-          <section className="bg-[#1e293b] rounded-2xl border border-slate-800 p-6 md:p-8 shadow-md flex flex-col gap-5">
-            <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 border-b border-slate-800 pb-5">
-              <div>
-                <span className="text-xs font-mono text-teal-400 uppercase tracking-wider font-semibold">
-                  Live Market Intelligence
-                </span>
-                <h3 className="text-xl font-bold text-white mt-1">Digital Pathology Regulatory Matrix (2017–2026)</h3>
-                <p className="text-xs text-slate-400 mt-0.5">Real-time FDA clearance volumes across core product codes (PSY, QKQ, SIX, QYV, QPN, SFH, SHW)</p>
-              </div>
-              <button
-                onClick={() => setActiveTab('radar')}
-                className="text-xs bg-teal-950 text-teal-300 border border-teal-500/40 hover:bg-teal-900/60 px-4 py-2 rounded-lg font-medium transition self-start md:self-auto"
-              >
-                Explore Full Database ({records.length} Records) →
-              </button>
-            </div>
-
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs border-collapse">
-                <thead>
-                  <tr className="bg-slate-800/60 text-slate-400 font-semibold border-b border-slate-700/80">
-                    <th className="py-2.5 px-3">Code</th>
-                    <th className="py-2.5 px-3">Category Title</th>
-                    {analyticsMatrix.years.slice(-5).map(y => (
-                      <th key={y} className="py-2.5 px-3 text-center">{y}</th>
-                    ))}
-                    <th className="py-2.5 px-3 text-right font-bold text-teal-400">Total</th>
+          <section style={styles.tableCard}>
+            <h3 style={{ ...styles.cardTitle, marginBottom: '16px' }}>
+              Live Digital Pathology FDA Clearances Summary (2017–2026)
+            </h3>
+            <table style={styles.table}>
+              <thead>
+                <tr>
+                  <th style={styles.th}>Code</th>
+                  <th style={styles.th}>Category Title</th>
+                  <th style={styles.th}>CFR Regulation</th>
+                  <th style={{ ...styles.th, textAlign: 'right' }}>Total Clearances</th>
+                </tr>
+              </thead>
+              <tbody>
+                {analyticsMatrix.codes.map(code => (
+                  <tr key={code}>
+                    <td style={{ ...styles.td, fontFamily: 'monospace', fontWeight: 'bold', color: '#2dd4bf' }}>{code}</td>
+                    <td style={{ ...styles.td, color: '#ffffff', fontWeight: '500' }}>{CODE_TAXONOMY[code]?.title}</td>
+                    <td style={styles.td}>{CODE_TAXONOMY[code]?.reg}</td>
+                    <td style={{ ...styles.td, textAlign: 'right', fontWeight: 'bold', color: '#2dd4bf' }}>
+                      {analyticsMatrix.matrix[code]["Total"]}
+                    </td>
                   </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-800/60 text-slate-300">
-                  {analyticsMatrix.codes.map(code => (
-                    <tr key={code} className="hover:bg-slate-800/30 transition">
-                      <td className="py-2 px-3 font-mono font-bold text-teal-400">{code}</td>
-                      <td className="py-2 px-3 font-medium text-white">{CODE_TAXONOMY[code]?.title}</td>
-                      {analyticsMatrix.years.slice(-5).map(y => (
-                        <td key={y} className="py-2 px-3 text-center font-mono">
-                          {analyticsMatrix.matrix[code][y] > 0 ? (
-                            <span className="bg-teal-950 text-teal-300 px-1.5 py-0.5 rounded border border-teal-500/30 font-bold">
-                              {analyticsMatrix.matrix[code][y]}
-                            </span>
-                          ) : (
-                            <span className="text-slate-600">0</span>
-                          )}
-                        </td>
-                      ))}
-                      <td className="py-2 px-3 text-right font-mono font-bold text-teal-400">
-                        {analyticsMatrix.matrix[code]["Total"]}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                ))}
+              </tbody>
+            </table>
           </section>
-
-        </div>
+        </main>
       )}
 
       {/* RADAR TOOL TAB */}
       {activeTab === 'radar' && (
-        <main className="flex-1 max-w-[1600px] w-full mx-auto p-6 flex flex-col gap-6">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-[#1e293b] p-6 rounded-2xl border border-slate-800">
+        <main style={styles.container}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
             <div>
-              <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-                Digital Pathology Regulatory Radar
-                <span className="text-xs bg-slate-800 text-teal-400 px-2.5 py-1 rounded-full border border-teal-500/20 font-mono">Live FDA Feed</span>
-              </h2>
-              <p className="text-xs text-slate-400 mt-1">Multi-endpoint ingestion (510k, De Novo, PMA) across PSY, QKQ, SIX, QYV, QPN, SFH, SHW</p>
+              <h2 style={{ ...styles.cardTitle, fontSize: '24px' }}>Digital Pathology Regulatory Radar</h2>
+              <p style={styles.cardText}>Real-time FDA openFDA multi-endpoint feed across core pathology product codes</p>
             </div>
-
-            <div className="flex items-center gap-3">
-              <button
-                onClick={copyMarkdownTable}
-                className="bg-teal-600 hover:bg-teal-500 text-white px-4 py-2.5 rounded-lg text-xs font-semibold transition"
-              >
+            <div style={styles.btnGroup}>
+              <button onClick={copyMarkdownTable} style={styles.primaryBtn}>
                 {copiedStatus ? "Copied Markdown!" : "Export Table"}
               </button>
-              <button
-                onClick={fetchAllFDAEndpoints}
-                disabled={loading}
-                className="p-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg border border-slate-700 transition text-xs font-mono"
-              >
-                {loading ? "Refreshing..." : "Refresh"}
+              <button onClick={fetchAllFDAEndpoints} style={styles.secondaryBtn}>
+                {loading ? "Refreshing..." : "Refresh Feed"}
               </button>
             </div>
           </div>
 
-          <div className="bg-[#1e293b] p-5 rounded-2xl border border-slate-800 shadow-sm">
-            <h3 className="text-xs font-bold text-white uppercase tracking-wider mb-3">
-              Summary Matrix: Clearances by Category & Year (2017–2026)
-            </h3>
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs border-collapse">
-                <thead>
-                  <tr className="bg-slate-800 text-slate-400 font-semibold border-b border-slate-700">
-                    <th className="py-2.5 px-3">Category Code</th>
-                    <th className="py-2.5 px-3">Title & Regulation Scope</th>
-                    {analyticsMatrix.years.map(y => (
-                      <th key={y} className="py-2.5 px-3 text-center">{y}</th>
-                    ))}
-                    <th className="py-2.5 px-3 text-right text-teal-400 font-bold">Total</th>
+          <input
+            type="text"
+            placeholder="Search by Manufacturer, Device Description, K-Number..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            style={styles.input}
+          />
+
+          <div style={styles.tableCard}>
+            <table style={styles.table}>
+              <thead>
+                <tr>
+                  <th style={styles.th}>Manufacturer / Applicant</th>
+                  <th style={styles.th}>Clearance Date & ID</th>
+                  <th style={styles.th}>Code</th>
+                  <th style={styles.th}>Device Description</th>
+                  <th style={{ ...styles.th, textAlign: 'right' }}>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {loading ? (
+                  <tr>
+                    <td colSpan={5} style={{ ...styles.td, textAlign: 'center', padding: '40px' }}>Loading openFDA data...</td>
                   </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-800 text-slate-300">
-                  {analyticsMatrix.codes.map(code => (
-                    <tr key={code} className="hover:bg-slate-800/40 transition">
-                      <td className="py-2 px-3 font-mono font-bold text-teal-400">{code}</td>
-                      <td className="py-2 px-3 text-slate-300">
-                        <span className="font-medium text-white">{CODE_TAXONOMY[code]?.title}</span>
-                        <span className="text-slate-500 text-[11px] ml-2">({CODE_TAXONOMY[code]?.reg})</span>
-                      </td>
-                      {analyticsMatrix.years.map(y => (
-                        <td key={y} className="py-2 px-3 text-center font-mono">
-                          {analyticsMatrix.matrix[code][y] > 0 ? (
-                            <span className="bg-teal-950/80 text-teal-300 px-1.5 py-0.5 rounded border border-teal-500/30 font-bold">
-                              {analyticsMatrix.matrix[code][y]}
-                            </span>
-                          ) : (
-                            <span className="text-slate-600">0</span>
-                          )}
-                        </td>
-                      ))}
-                      <td className="py-2 px-3 text-right font-mono font-bold text-teal-400">
-                        {analyticsMatrix.matrix[code]["Total"]}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div className="bg-[#1e293b] p-4 rounded-xl border border-slate-800 shadow-sm flex flex-col gap-3">
-            <input
-              type="text"
-              placeholder="Search by Manufacturer, Device Description, K-Number..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-[#0f172a] border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-500"
-            />
-
-            <div className="flex flex-wrap items-center gap-2 pt-1">
-              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider mr-2">Filter Code:</span>
-              <button
-                onClick={() => setActiveCodeFilter("ALL")}
-                className={`text-xs px-3 py-1.5 rounded-full border transition ${
-                  activeCodeFilter === "ALL"
-                    ? "bg-teal-500/20 border-teal-500 text-teal-300 font-medium"
-                    : "bg-slate-800 border-slate-700 text-slate-400 hover:bg-slate-700"
-                }`}
-              >
-                ALL CODES
-              </button>
-              {Object.keys(CODE_TAXONOMY).map(code => (
-                <button
-                  key={code}
-                  onClick={() => setActiveCodeFilter(code)}
-                  className={`text-xs px-3 py-1.5 rounded-full border transition font-mono ${
-                    activeCodeFilter === code
-                      ? "bg-teal-500/20 border-teal-500 text-teal-300 font-bold"
-                      : "bg-slate-800 border-slate-700 text-slate-400 hover:bg-slate-700"
-                  }`}
-                >
-                  {code}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="bg-[#1e293b] border border-slate-800 rounded-xl overflow-hidden shadow-sm flex-1">
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm border-collapse">
-                <thead>
-                  <tr className="bg-slate-800/80 text-slate-400 font-semibold text-xs border-b border-slate-700 uppercase tracking-wider">
-                    <th className="py-3.5 px-4">Manufacturer / Applicant</th>
-                    <th className="py-3.5 px-4">Clearance Date & K-Number</th>
-                    <th className="py-3.5 px-4">Category Code</th>
-                    <th className="py-3.5 px-4">Description / Device Name</th>
-                    <th className="py-3.5 px-4 text-right">FDA CDRH Link</th>
+                ) : filteredRecords.length === 0 ? (
+                  <tr>
+                    <td colSpan={5} style={{ ...styles.td, textAlign: 'center', padding: '40px' }}>No clearances match search query.</td>
                   </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-800 text-slate-300">
-                  {loading ? (
-                    <tr>
-                      <td colSpan={5} className="py-12 text-center text-slate-500">
-                        Loading live openFDA dataset...
+                ) : (
+                  filteredRecords.map((item, idx) => (
+                    <tr 
+                      key={idx} 
+                      onClick={() => setSelectedRecord(item)}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      <td style={{ ...styles.td, color: '#ffffff', fontWeight: 'bold' }}>{item.applicant}</td>
+                      <td style={{ ...styles.td, fontFamily: 'monospace' }}>
+                        {item.decision_date} <span style={{ color: '#2dd4bf', display: 'block' }}>{item.k_number}</span>
+                      </td>
+                      <td style={{ ...styles.td, fontFamily: 'monospace', color: '#2dd4bf', fontWeight: 'bold' }}>{item.product_code}</td>
+                      <td style={styles.td}>{item.device_name}</td>
+                      <td style={{ ...styles.td, textAlign: 'right' }}>
+                        <a 
+                          href={`https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=${item.k_number}`}
+                          target="_blank" 
+                          rel="noreferrer"
+                          style={{ color: '#2dd4bf', textDecoration: 'none', fontSize: '12px' }}
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          FDA Link →
+                        </a>
                       </td>
                     </tr>
-                  ) : filteredRecords.length === 0 ? (
-                    <tr>
-                      <td colSpan={5} className="py-12 text-center text-slate-500">
-                        No clearances match your search criteria.
-                      </td>
-                    </tr>
-                  ) : (
-                    filteredRecords.map((item, idx) => (
-                      <tr 
-                        key={idx}
-                        onClick={() => setSelectedRecord(item)}
-                        className="hover:bg-slate-800/50 transition cursor-pointer group"
-                      >
-                        <td className="py-3.5 px-4 font-semibold text-white">{item.applicant}</td>
-                        <td className="py-3.5 px-4 font-mono text-xs text-slate-400 whitespace-nowrap">
-                          {item.decision_date}
-                          <span className="text-teal-400 font-bold block mt-0.5">{item.k_number}</span>
-                        </td>
-                        <td className="py-3.5 px-4 font-mono">
-                          <span className="bg-teal-950/80 text-teal-300 px-2.5 py-1 rounded border border-teal-500/30 text-xs font-bold">
-                            {item.product_code}
-                          </span>
-                        </td>
-                        <td className="py-3.5 px-4 max-w-[380px]">
-                          <div className="font-medium text-slate-100">{item.device_name}</div>
-                          <div className="text-xs text-slate-400 truncate mt-0.5">{item.intended_use}</div>
-                        </td>
-                        <td className="py-3.5 px-4 text-right" onClick={(e) => e.stopPropagation()}>
-                          <a
-                            href={`https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=${item.k_number}`}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="inline-flex items-center text-xs text-teal-400 hover:text-teal-300 bg-slate-800 px-2.5 py-1.5 rounded border border-slate-700 transition"
-                          >
-                            FDA Record →
-                          </a>
-                        </td>
-                      </tr>
-                    ))
-                  )}
-                </tbody>
-              </table>
-            </div>
+                  ))
+                )}
+              </tbody>
+            </table>
           </div>
         </main>
       )}
 
-      {/* Detail Slide Drawer */}
+      {/* Slide Drawer */}
       {selectedRecord && (
-        <div className="fixed inset-0 z-50 overflow-hidden bg-slate-950/70 backdrop-blur-sm flex justify-end">
-          <div className="w-full max-w-xl bg-[#1e293b] border-l border-slate-700 shadow-2xl flex flex-col h-full">
-            <div className="p-6 border-b border-slate-700 flex items-start justify-between bg-[#0f172a]">
-              <div>
-                <span className="text-xs font-mono text-teal-400 bg-teal-950 px-2.5 py-1 rounded border border-teal-500/30">
-                  {selectedRecord.product_code} | {selectedRecord.k_number}
-                </span>
-                <h2 className="text-xl font-bold text-white mt-2">{selectedRecord.device_name}</h2>
-                <p className="text-sm text-slate-400 mt-0.5">{selectedRecord.applicant}</p>
-              </div>
-              <button 
-                onClick={() => setSelectedRecord(null)}
-                className="p-1 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition"
-              >
-                ✕
-              </button>
-            </div>
-
-            <div className="p-6 flex-1 overflow-y-auto space-y-5">
-              <div className="grid grid-cols-2 gap-3">
-                <div className="bg-[#0f172a] p-3 rounded-lg border border-slate-800">
-                  <span className="text-xs text-slate-500 uppercase font-semibold">Clearance Date</span>
-                  <p className="text-sm font-mono text-slate-200 mt-0.5">{selectedRecord.decision_date}</p>
-                </div>
-                <div className="bg-[#0f172a] p-3 rounded-lg border border-slate-800">
-                  <span className="text-xs text-slate-500 uppercase font-semibold">CFR Regulation</span>
-                  <p className="text-sm font-medium text-teal-400 mt-0.5">
-                    {CODE_TAXONOMY[selectedRecord.product_code]?.reg || "21 CFR 864"}
-                  </p>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
-                  FDA Summary / Intended Use Statement
-                </h3>
-                <div className="bg-[#0f172a] p-4 rounded-lg border border-slate-800 text-sm text-slate-300 leading-relaxed">
-                  {selectedRecord.intended_use}
-                </div>
-              </div>
-            </div>
-
-            <div className="p-4 border-t border-slate-700 bg-[#0f172a] flex items-center justify-between">
-              <a
-                href={`https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=${selectedRecord.k_number}`}
-                target="_blank"
-                rel="noreferrer"
-                className="text-xs text-teal-400 hover:text-teal-300"
-              >
-                Open Official FDA CDRH Page →
-              </a>
-              <button
-                onClick={() => setSelectedRecord(null)}
-                className="bg-slate-800 hover:bg-slate-700 text-slate-200 px-4 py-2 rounded-lg text-xs font-medium transition"
-              >
-                Close
-              </button>
-            </div>
+        <div style={styles.drawer}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span style={styles.badge}>{selectedRecord.product_code} | {selectedRecord.k_number}</span>
+            <button onClick={() => setSelectedRecord(null)} style={{ background: 'none', border: 'none', color: '#94a3b8', fontSize: '20px', cursor: 'pointer' }}>✕</button>
           </div>
+          <h2 style={{ ...styles.cardTitle, fontSize: '20px' }}>{selectedRecord.device_name}</h2>
+          <p style={styles.cardText}>{selectedRecord.applicant}</p>
+          <div style={{ backgroundColor: '#0f172a', padding: '16px', borderRadius: '8px', border: '1px solid #334155' }}>
+            <span style={{ fontSize: '11px', color: '#94a3b8', textTransform: 'uppercase', fontWeight: 'bold' }}>Summary Statement</span>
+            <p style={{ fontSize: '13px', color: '#cbd5e1', lineHeight: '1.5', marginTop: '8px' }}>{selectedRecord.intended_use}</p>
+          </div>
+          <a 
+            href={`https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=${selectedRecord.k_number}`}
+            target="_blank" 
+            rel="noreferrer"
+            style={{ ...styles.primaryBtn, textAlign: 'center', textDecoration: 'none', marginTop: 'auto' }}
+          >
+            Open Official CDRH Record
+          </a>
         </div>
       )}
 
-      {/* Footer */}
-      <footer className="border-t border-slate-800 bg-[#0f172a] px-6 py-6 text-center text-xs text-slate-500 font-mono">
+      <footer style={{ padding: '24px', borderTop: '1px solid #334155', textAlign: 'center', fontSize: '12px', color: '#64748b', fontFamily: 'monospace' }}>
         © {new Date().getFullYear()} Rivers Strategic Advisors LLC. All rights reserved. | Sunnyvale, California
       </footer>
     </div>
