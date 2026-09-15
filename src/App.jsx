@@ -258,7 +258,7 @@ export default function App() {
       letterSpacing: '-0.02em'
     },
     heroSubtitle: {
-      fontSize: '26px', // Increased font size for higher emphasis
+      fontSize: '26px',
       fontWeight: '700',
       color: '#2dd4bf',
       lineHeight: '1.3',
@@ -360,22 +360,23 @@ export default function App() {
       gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
       gap: '20px'
     },
-    cardCentered: {
-      backgroundColor: '#293548',
-      border: '1px solid #475569',
-      borderRadius: '12px',
-      padding: '24px',
+    // Expertise Card Styling - Removed "Button" aesthetic
+    expertiseCard: {
+      backgroundColor: '#1e293b',
+      borderLeft: '4px solid #2dd4bf', // Accent bar indicating content section
+      borderRadius: '8px',
+      padding: '24px 28px',
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'center',
-      textAlign: 'center',
-      boxShadow: '0 10px 15px -3px rgba(0,0,0,0.3)'
+      cursor: 'default',
+      boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.2)'
     },
-    cardCenteredTitle: {
-      fontSize: '17px',
+    expertiseCardTitle: {
+      fontSize: '18px',
       fontWeight: '700',
       color: '#ffffff',
-      margin: 0
+      margin: 0,
+      lineHeight: '1.3'
     },
     sectionDivider: {
       marginTop: '36px',
@@ -552,18 +553,23 @@ export default function App() {
             </div>
           </section>
 
-          {/* Centered Expertise Pillar Buttons */}
-          <section style={styles.grid3}>
-            <div style={styles.cardCentered}>
-              <h3 style={styles.cardCenteredTitle}>Commercial Strategy & Market Entry</h3>
-            </div>
-            <div style={styles.cardCentered}>
-              <h3 style={styles.cardCenteredTitle}>Corporate Advisory & Board Work</h3>
-            </div>
-            <div style={styles.cardCentered}>
-              <h3 style={styles.cardCenteredTitle}>Market Access & Commercial Economics</h3>
-            </div>
-          </section>
+          {/* Core Expertise Cards (Reformatted to look like knowledge areas, not buttons) */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <span style={{ fontSize: '12px', fontFamily: 'monospace', fontWeight: '700', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+              Core Practice Areas
+            </span>
+            <section style={styles.grid3}>
+              <div style={styles.expertiseCard}>
+                <h3 style={styles.expertiseCardTitle}>Commercial Strategy & Market Entry</h3>
+              </div>
+              <div style={styles.expertiseCard}>
+                <h3 style={styles.expertiseCardTitle}>Corporate Advisory & Board Work</h3>
+              </div>
+              <div style={styles.expertiseCard}>
+                <h3 style={styles.expertiseCardTitle}>Market Access & Commercial Economics</h3>
+              </div>
+            </section>
+          </div>
 
           {/* Industry Insights Section */}
           <div style={styles.sectionDivider}>
@@ -574,7 +580,7 @@ export default function App() {
             <section style={styles.tableCard}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '12px' }}>
                 <div>
-                  <h3 style={{ ...styles.cardCenteredTitle, textAlign: 'left', fontSize: '18px', margin: 0 }}>
+                  <h3 style={{ ...styles.expertiseCardTitle, textAlign: 'left', fontSize: '18px', margin: 0 }}>
                     Digital Pathology Regulatory Clearances (2017 - 2026)
                   </h3>
                   <p style={{ fontSize: '12px', marginTop: '4px', color: '#64748b', margin: 0 }}>
@@ -631,7 +637,7 @@ export default function App() {
         <main style={styles.container}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
             <div>
-              <h2 style={{ ...styles.cardCenteredTitle, fontSize: '24px', textAlign: 'left' }}>Digital Pathology Regulatory Radar</h2>
+              <h2 style={{ ...styles.expertiseCardTitle, fontSize: '24px', textAlign: 'left' }}>Digital Pathology Regulatory Radar</h2>
               <p style={{ fontSize: '14px', color: '#94a3b8', margin: '4px 0 0 0' }}>Real-time openFDA multi-endpoint feed across core pathology product codes</p>
             </div>
             <div style={styles.btnGroup}>
@@ -712,7 +718,7 @@ export default function App() {
             <span style={{ ...styles.pill(1), fontSize: '12px' }}>{selectedRecord.product_code} | {selectedRecord.k_number}</span>
             <button onClick={() => setSelectedRecord(null)} style={{ background: 'none', border: 'none', color: '#94a3b8', fontSize: '20px', cursor: 'pointer' }}>✕</button>
           </div>
-          <h2 style={{ ...styles.cardCenteredTitle, fontSize: '20px', textAlign: 'left' }}>{selectedRecord.device_name}</h2>
+          <h2 style={{ ...styles.expertiseCardTitle, fontSize: '20px', textAlign: 'left' }}>{selectedRecord.device_name}</h2>
           <p style={{ fontSize: '14px', color: '#cbd5e1', margin: 0 }}>{selectedRecord.applicant}</p>
           <div style={{ backgroundColor: '#0f172a', padding: '16px', borderRadius: '8px', border: '1px solid #334155' }}>
             <span style={{ fontSize: '11px', color: '#94a3b8', textTransform: 'uppercase', fontWeight: 'bold' }}>Summary Statement</span>
